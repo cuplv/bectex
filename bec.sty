@@ -1,21 +1,27 @@
 % Personal Macros - Bor-Yuh Evan Chang
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{bec}[2013/12/23 Bor-Yuh Evan Chang]
+\ProvidesPackage{bec}[2016/06/14 Bor-Yuh Evan Chang]
 
 % Options
 \newif\ifusinglncs\usinglncsfalse
+\newif\ifusinglipics\usinglipicsfalse
 \newif\ifusexcolor\usexcolortrue
 \newif\ifusehyperref\usehyperreftrue
 \newif\ifusetheoremenvs\usetheoremenvstrue
 \newif\ifusenatbib\usenatbibtrue
+\newif\ifusegraphicx\usegraphicxtrue
+\newif\ifusesubfig\usesubfigtrue
 \newif\ifuseesvect\useesvectfalse
 
 \DeclareOption{lncs}{\usinglncstrue\usetheoremenvsfalse}
+\DeclareOption{lipics}{\usinglipicstrue\usegraphicxfalse\usesubfigfalse\usehyperreffalse\usetheoremenvsfalse}
 \DeclareOption{noxcolor}{\usexcolorfalse}
 \DeclareOption{nohyperref}{\usehyperreffalse}
 \DeclareOption{notheoremenvs}{\usetheoremenvsfalse}
-\DeclareOption{nonatbib}{\usenatbibtrue}
+\DeclareOption{nonatbib}{\usenatbibfalse}
+\DeclareOption{nographicx}{\usegraphicxfalse}
+\DeclareOption{nosubfig}{\usesubfigfalse}
 \DeclareOption{esvect}{\useesvecttrue}
 \ProcessOptions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -33,7 +39,7 @@
 \else\ifnum\pdfoutput=0
   \generatingpdffalse    % using PDFLaTeX for DVI
 \else
-  \pdfoutput=1 
+  \pdfoutput=1
   \generatingpdftrue     % using PDFLaTeX for PDF
 \fi\fi
 
@@ -55,10 +61,15 @@
 %\usepackage{pslatex}   % times, helevetica, special-narrow courier
 %\usepackage{newcent}   % new century schoolbook, avant garde, courier
 %\usepackage{bookman}
-%\usepackage{helvet} 
+%\usepackage{helvet}
 %\usepackage{courier}
 %\usepackage{mathptmx} % times, CM math
 %\usepackage{fourier}
+
+%\usepackage{lmodern} % Latin Modern, based on CM
+  % \fontseries{l}\selectfont light
+  % \fontseries{m}\selectfont medium
+  % \fontseries{b}\selectfont bold
 
 %% Required Standard Packages
 
@@ -70,13 +81,13 @@
 \usepackage{xspace}     % pkg tools
 \usepackage{tabularx}   % pkg tools - equal width columns
 
-\ifgeneratingpdf
-  \usepackage[pdftex]{graphicx}   % pkg graphics
+\ifusegraphicx\ifgeneratingpdf
+  \RequirePackage[pdftex]{graphicx}   % pkg graphics
 \else
-  \usepackage[dvips]{graphicx}   % pkg graphics
-\fi
+  \RequirePackage[dvips]{graphicx}   % pkg graphics
+\fi\fi
 
-\usepackage{amsmath}    % pkg amslatex 
+\usepackage{amsmath}    % pkg amslatex
 \usepackage{amssymb}    % pkg amsfonts
 %\usepackage{eucal}      % pkg amsfonts
 %\usepackage{eufrak}     % pkg amsfonts
@@ -85,35 +96,32 @@
 %\usepackage{longtable}
 
 %% Common CTAN Contributed Packages
- 
-%\let\MY@makecaption\@makecaption
-\usepackage[caption=false]{subfig}    % pkg subfig - subfigures
-%\renewcommand{\thesubfigure}{(\alph{subfigure})}
-%\captionsetup[subfigure]{labelformat=simple}
-%\usepackage{caption}   % pkg caption - format captions (also loaded by subfig)
-%\long\def\@makecaption{\MY@makecaption}
+
+\ifusesubfig
+  \usepackage[caption=false]{subfig}    % pkg subfig - subfigures
+\fi
 
 \usepackage{wrapfig}   % pkg wrapfig - wrap text around floats
 \setlength{\intextsep}{2pt}
 
-%\usepackage{paralist}
+\usepackage{booktabs}  % pkg booktabs - nicer table layout
+\usepackage{paralist}
+\usepackage{relsize}    % relative font size
+
+%\usepackage{cancel}    % math strikethrough
 %\usepackage{algorithmic}  % pkg algorithms - typeset algorithms
 %\usepackage{fancybox}  % pkg fancybox
-%\usepackage{mathrsfs}  % pkg jknappen (fonts rsfs and hoekwater [type 1])
 %\usepackage{fancyvrb}  % pkg fancyvrb - fancy verbatim
-%\usepackage{booktabs}  % pkg booktabs - nicer table layout
 %\usepackage{fancyhdr}  % pkg fancyhdr - for headers and footers
 %\usepackage{url}
-%\usepackage[bbgreekl]{mathbbol}  % bbgreekl option for bb greek letters
-%\usepackage{upgreek}    % upright greek fonts
-%\usepackage{bbding}              % for asterisk
 
+%\usepackage{upgreek}    % upright greek fonts
+%\usepackage{mathrsfs}  % pkg jknappen (fonts rsfs and hoekwater [type 1])
 %\let\MY@Rightarrow\Rightarrow
 %\usepackage{marvosym}  % for null symbol
 %\let\Rightarrow\MY@Rightarrow
-
-\usepackage{relsize}    % relative font size
-%\usepackage{cancel}    % math strikethrough
+%\usepackage[bbgreekl]{mathbbol}  % bbgreekl option for bb greek letters
+%\usepackage{bbding}              % for asterisk
 
 %% Non-standard Packages
 
@@ -202,14 +210,26 @@
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
+% Underlines
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage[normalem]{ulem}
+\useunder{\dashuline}{\dashul}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
 % Listings
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{listings}
 
+\newcommand{\lstbasicstyle}{\ttfamily\fontseries{l}\selectfont}
+\newcommand{\lstnumberstyle}{\scriptsize\em}
+
 \lstdefinestyle{default}{%
-  basicstyle=\ttfamily,%
+  backgroundcolor=\color{white},%
+  %basicstyle=\ttfamily,%
+  basicstyle=\lstbasicstyle,%
   commentstyle=\sl,%
-  keywordstyle=\bf,%
+  %keywordstyle=\bf,%
+  keywordstyle=\footnotesize\fontseries{b}\selectfont,%
   columns=fullflexible,%
   keepspaces=true,%
   mathescape,%
@@ -239,7 +259,7 @@
 
 \lstdefinestyle{number}{%
   numbers=left,%
-  numberstyle=\scriptsize\em,%
+  numberstyle=\lstnumberstyle,%
   xleftmargin=2em%
 }
 \lstdefinestyle{captioned}{%
@@ -266,7 +286,8 @@
   moredelim=**[is][\colordullx{7}]{|7:}{|},
   moredelim=**[is][\color{greyseventyfive}]{|g:}{|},
   moredelim=**[is][\color{greyfifty}]{|gg:}{|},
-  moredelim=**[is][\color{greytwentyfive}]{|ggg:}{|}
+  moredelim=**[is][\color{greytwentyfive}]{|ggg:}{|},
+  moredelim=*[is][\dashul]{|dashul:}{|}
 }
 
 \lstdefinelanguage{Scala}{
@@ -330,9 +351,10 @@
 }
 
 \newcommand{\code}[2][\empty]{%
-\ifx#1\empty \ensuremath{\text{\lstinline{#2}}}%
-\else \ensuremath{\text{\lstinline[language=#1]{#2}}}\fi}
-\newcommand{\codex}[2]{\ensuremath{\text{\lstinline[#1]{#2}}}}
+\ifx#1\empty \ensuremath{\text{\lstinline~#2~}}%
+\else \ensuremath{\text{\lstinline[language=#1]~#2~}}\fi}
+\newcommand{\codex}[2]{\ensuremath{\text{\lstinline[#1]~#2~}}}
+\newcommand{\pcode}[1]{\ensuremath{\text{\texttt{#1}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Hyperref
@@ -376,7 +398,7 @@
   \fi\fi
 \fi
 \def\@bibitem{\MY@bibitem}
-\def\@lbibitem{\MY@lbibitem} 
+\def\@lbibitem{\MY@lbibitem}
 
 \newcommand{\pdftitle}[1]{%
 \ifusehyperref%
@@ -506,6 +528,8 @@
 \newcommand{\Tblreftext}{Table}
 \newcommand{\lstreftext}{Listing}
 \newcommand{\Lstreftext}{Listing}
+\newcommand{\linereftext}{Line}
+\newcommand{\Linereftext}{Line}
 
 \ifusinglncs
   % LNCS Abbreviations
@@ -544,6 +568,8 @@
 \newcommand{\Tblref}[1]{\Tblreftext~\ref{tbl:#1}}
 \newcommand{\lstref}[1]{\lstreftext~\ref{lst:#1}}
 \newcommand{\Lstref}[1]{\Lstreftext~\ref{lst:#1}}
+\newcommand{\lineref}[1]{\lstreftext~\ref{line:#1}}
+\newcommand{\Lineref}[1]{\Lstreftext~\ref{line:#1}}
 \newcommand{\refn}[1]{\ref{#1}}
 \newcommand{\reftxt}[2]{#1~\ref{#2}}
 
@@ -615,6 +641,8 @@
   }
   \renewcommand{\lstref}[1]{\hyperref[lst:#1]{\lstreftext~\ref*{lst:#1}}}
   \renewcommand{\Lstref}[1]{\hyperref[lst:#1]{\Lstreftext~\ref*{lst:#1}}}
+  \renewcommand{\lineref}[1]{\hyperref[line:#1]{\lstreftext~\ref*{line:#1}}}
+  \renewcommand{\Lineref}[1]{\hyperref[line:#1]{\Lstreftext~\ref*{line:#1}}}
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -795,7 +823,7 @@
   \newtheorem{theorem}{Theorem}
   \newtheorem{lemma}[theorem]{Lemma}
   \newtheorem{corollary}[theorem]{Corollary}
-  
+
   \theoremstyle{definition}
   \newtheorem{definition}{Definition}
   \newtheorem{example}{Example}
@@ -1014,6 +1042,7 @@
 \newsavebox{\powersetbox}
 \sbox{\powersetbox}{\mbox{\large\ensuremath{\PowersetSym}}}
 \providecommand{\powerset}{\mathopen{\usebox{\powersetbox}}}
+\newcommand{\finitepowerset}{\mathopen{\usebox{\powersetbox}_{\text{fin}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Grammars
@@ -1041,7 +1070,7 @@
       }{%
         \tabular*{#3}{R@{\;}R@{\;}L@{\quad}#2}%
       }%
-    }% 
+    }%
   }{%
     % #1 has value@{\quad}#2
     \ifthenelse{\equal{#2}{}}{%
@@ -1101,8 +1130,9 @@
 %\newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\set}[1]{\{ #1 \}}
 \newcommand{\tuple}[1]{\langle #1 \rangle}
-%\newcommand{\abs}[1]{\mathopen| #1 \mathclose|}    % use instead of $|x|$ 
+\newcommand{\abs}[1]{\mathopen| #1 \mathclose|}    % use instead of $|x|$
 \newcommand{\norm}[1]{\mathopen\| #1 \mathclose\|} % use instead of $\|x\|$
+\newcommand{\card}[1]{\abs{#1}}
 \newcommand{\denote}[1]{\llbracket #1 \rrbracket}
 \newcommand{\ucorners}[1]{\ulcorner #1 \urcorner}
 \newcommand{\lcorners}[1]{\llcorner #1 \lrcorner}
@@ -1117,8 +1147,8 @@
 \newcommand{\UCorners}[1]{\left\ulcorner #1 \right\urcorner}
 \newcommand{\LCorners}[1]{\left\llcorner #1 \right\lrcorner}
 
-%\newcommand{\middle}[1]{\mathrel{\left{#1}\vphantom{#1}\right.\n@space}}
-\newcommand{\SetST}[2]{\Set{\,#1 \,\left|\vphantom{#1#2}\right.\, #2\,}}
+\newcommand{\SuchThat}[2]{\mathrel{\left|\vphantom{#1#2}\right.}}
+\newcommand{\SetST}[2]{\Set{\,#1 \SuchThat{#1}{#2} #2\,}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Tuples
@@ -1225,6 +1255,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Other Symbols
 %%%%%%%%%%%%%%%%%%%%%%%%%
+% danger
+\newcommand{\danger}{{\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax}}
 % fat
 \newsavebox{\@fatcolonbox}
 \sbox{\@fatcolonbox}{%
@@ -1396,6 +1428,16 @@
 \fi
 
 \newcommand{\AIabs}[1]{#1^{\boldsymbol{\sharp}}}
+
+\newcommand{\absof}[1]{\ensuremath{\widehat{\smash{#1}}}}
+\newcommand{\absofset}[1]{\ensuremath{\hat{#1}}}
+\newcommand{\seq}[1]{\ensuremath{(#1)}}
+\newcommand{\seqof}[1]{\ensuremath{#1^{\ast}}}
+\newcommand{\nonemptyseqof}[1]{\ensuremath{#1^{+}}}
+\newcommand{\infseqof}[1]{\ensuremath{#1^{\omega}}}
+
+\DeclareMathOperator{\lfp}{lfp}
+\DeclareMathOperator{\gfp}{gfp}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
