@@ -63,13 +63,15 @@
 %\usepackage{bookman}
 %\usepackage{helvet}
 %\usepackage{courier}
-%\usepackage{mathptmx} % times, CM math
 %\usepackage{fourier}
 
 %\usepackage{lmodern} % Latin Modern, based on CM
   % \fontseries{l}\selectfont light
   % \fontseries{m}\selectfont medium
   % \fontseries{b}\selectfont bold
+
+%\usepackage{mathptmx} % times, CM math
+%\renewcommand{\ttdefault}{lmtt} % Latin Modern tt
 
 %% Required Standard Packages
 
@@ -1229,7 +1231,7 @@
 }%
 \newcommand{\downarrowtriangle}{\@downarrowtriangle}
 
-\newcommand{\leftsquigarrow}{\ensuremath{\mathrel{\reflectbox{$\rightsquigarrow$}}}}
+%\newcommand{\leftsquigarrow}{\ensuremath{\mathrel{\reflectbox{$\rightsquigarrow$}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Graphs
@@ -1429,7 +1431,7 @@
 
 \newcommand{\AIabs}[1]{#1^{\boldsymbol{\sharp}}}
 
-\newcommand{\absof}[1]{\ensuremath{\widehat{\smash{#1}}}}
+\newcommand{\absof}[1]{\ensuremath{\widehat{\text{\relscale{0.9}$#1$}}}}
 \newcommand{\absofset}[1]{\ensuremath{\hat{#1}}}
 \newcommand{\seq}[1]{\ensuremath{(#1)}}
 \newcommand{\seqof}[1]{\ensuremath{#1^{\ast}}}
