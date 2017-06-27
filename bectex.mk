@@ -38,6 +38,6 @@ init:
 %.pdf: %.tex
 	latexmk -pdf -use-make $<
 
-% Detex a .tex file
+# Detex a .tex file
 %.txt: %.tex
 	cat $< | detex | sed 's/---/--/g' > $@
