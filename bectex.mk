@@ -7,7 +7,7 @@
 BIBS = $(wildcard *.orig.bib)
 SRCS = $(wildcard *.tex) $(wildcard *.sty) $(BIBS:%.orig.bib=%.short.bib)
 
-.PHONY: html pdf all init cleandeps clean cleanall
+.PHONY: html pdf all cleandeps clean cleanall
 
 all: pdf
 pdf: ${PAPERS:%=%.pdf}
@@ -22,10 +22,6 @@ clean: cleandeps
 cleanall: cleandeps
 	latexmk -C
 	
-# Symlink bectex files to this directory
-init:
-	ln -s bectex/* .
-
 # Generate TR TeX
 %.tr.tex: %.tex
 	sed 's/\\TRfalse/\\TRtrue/' $< >$@
@@ -41,3 +37,19 @@ init:
 # Detex a .tex file
 %.txt: %.tex
 	cat $< | detex | sed 's/---/--/g' > $@
+
+######################################################################
+# For initialization
+
+INIT_LN = bectex.mk conference.orig.bib bec.orig.bib bec.sty mathpartir.sty
+INIT_CP = Makefile
+INIT_FROM = bectex
+
+.PHONY: init initcp
+
+# Symlink bectex files to this directory
+init: $(INIT_CP)
+	ln -s $(addprefix $(INIT_FROM)/, $(INIT_LN)) .
+
+$(INIT_CP): $(INIT_CP:%=bectex/%)
+	cp $(addprefix $(INIT_FROM)/, $(INIT_CP)) .

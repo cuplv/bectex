@@ -4,13 +4,19 @@ Some personal macros and starter files for LaTeX projects.
 
 ## Typical Usage
 
-After starting a new git repository for a paper (e.g., via `git init`), add a submodule reference to this repository and then symlink the contents of the directory:
+After starting a new git repository for a paper (e.g., via `git init`), add a submodule reference to this repository.
 
 ```bash
 ~/paper (master)$ git submodule add https://github.com/cuplv/bectex.git
-~/paper (master)$ ln -s bectex/* .
-~/paper (master)$ make
 ```
+
+Then, symlink (or copy) the desired files from `bectex/` into the root directory. The command
+
+```bash
+~/paper (master)$ make -f bectex/Makefile init
+```
+
+will copy the editable `Makefile` and symlink all other files.
 
 Currently, the `Makefile` mostly delegates to [Latexmk] (which comes with [MacTeX]) to do the work.
 
