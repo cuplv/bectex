@@ -13,7 +13,7 @@ After starting a new git repository for a paper (e.g., via `git init`), add a su
 Then, symlink (or copy) the desired files from `bectex/` into the root directory. The command
 
 ```bash
-~/paper (master)$ make -f bectex/Makefile init
+~/paper (master)$ make -f bectex/bectex.mk init
 ```
 
 will copy the editable `Makefile` and symlink all other files.
