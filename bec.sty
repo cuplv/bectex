@@ -55,33 +55,35 @@
 
 %% Fonts
 
-%\usepackage{palatcm}   % palatino text, but CM math
-%\usepackage{palatino}  % palatino, helevetica, courier
-%\usepackage{times}     % times, helevetica, courier
-%\usepackage{pslatex}   % times, helevetica, special-narrow courier
-%\usepackage{newcent}   % new century schoolbook, avant garde, courier
-%\usepackage{bookman}
-%\usepackage{helvet}
-%\usepackage{courier}
-%\usepackage{fourier}
+%\RequirePackage{palatcm}   % palatino text, but CM math
+%\RequirePackage{palatino}  % palatino, helevetica, courier
+%\RequirePackage{times}     % times, helevetica, courier
+%\RequirePackage{pslatex}   % times, helevetica, special-narrow courier
+%\RequirePackage{newcent}   % new century schoolbook, avant garde, courier
+%\RequirePackage{bookman}
+%\RequirePackage{helvet}
+%\RequirePackage{courier}
+%\RequirePackage{fourier}
 
-%\usepackage{lmodern} % Latin Modern, based on CM
+%\RequirePackage{lmodern} % Latin Modern, based on CM
   % \fontseries{l}\selectfont light
   % \fontseries{m}\selectfont medium
   % \fontseries{b}\selectfont bold
 
-%\usepackage{mathptmx} % times, CM math
+%\RequirePackage{mathptmx} % times, CM math
 %\renewcommand{\ttdefault}{lmtt} % Latin Modern tt
+
+\RequirePackage{microtype}
 
 %% Required Standard Packages
 
-\usepackage{ifthen}     % pkg ltxbase
-\usepackage{array}      % pkg tools - additional column types
+\RequirePackage{ifthen}     % pkg ltxbase
+\RequirePackage{array}      % pkg tools - additional column types
 
 %% Standard Packages
 
-\usepackage{xspace}     % pkg tools
-\usepackage{tabularx}   % pkg tools - equal width columns
+\RequirePackage{xspace}     % pkg tools
+\RequirePackage{tabularx}   % pkg tools - equal width columns
 
 \ifusegraphicx\ifgeneratingpdf
   \RequirePackage[pdftex]{graphicx}   % pkg graphics
@@ -89,53 +91,53 @@
   \RequirePackage[dvips]{graphicx}   % pkg graphics
 \fi\fi
 
-\usepackage{amsmath}    % pkg amslatex
-\usepackage{amssymb}    % pkg amsfonts
-%\usepackage{eucal}      % pkg amsfonts
-%\usepackage{eufrak}     % pkg amsfonts
-\usepackage{stmaryrd}   % pkg stmaryrd
-\usepackage{calc}       % pkg tools - infix arithmetic
-%\usepackage{longtable}
+\RequirePackage{amsmath}    % pkg amslatex
+\RequirePackage{amssymb}    % pkg amsfonts
+%\RequirePackage{eucal}      % pkg amsfonts
+%\RequirePackage{eufrak}     % pkg amsfonts
+\RequirePackage{stmaryrd}   % pkg stmaryrd
+\RequirePackage{calc}       % pkg tools - infix arithmetic
+%\RequirePackage{longtable}
 
 %% Common CTAN Contributed Packages
 
 \ifusesubfig
-  \usepackage[caption=false]{subfig}    % pkg subfig - subfigures
+  \RequirePackage[caption=false]{subfig}    % pkg subfig - subfigures
 \fi
 
-\usepackage{wrapfig}   % pkg wrapfig - wrap text around floats
+\RequirePackage{wrapfig}   % pkg wrapfig - wrap text around floats
 \setlength{\intextsep}{2pt}
 
-\usepackage{booktabs}  % pkg booktabs - nicer table layout
-\usepackage{paralist}
-\usepackage{relsize}    % relative font size
+\RequirePackage{booktabs}  % pkg booktabs - nicer table layout
+\RequirePackage{paralist}
+\RequirePackage{relsize}    % relative font size
 
-%\usepackage{cancel}    % math strikethrough
-%\usepackage{algorithmic}  % pkg algorithms - typeset algorithms
-%\usepackage{fancybox}  % pkg fancybox
-%\usepackage{fancyvrb}  % pkg fancyvrb - fancy verbatim
-%\usepackage{fancyhdr}  % pkg fancyhdr - for headers and footers
-%\usepackage{url}
+%\RequirePackage{cancel}    % math strikethrough
+%\RequirePackage{algorithmic}  % pkg algorithms - typeset algorithms
+%\RequirePackage{fancybox}  % pkg fancybox
+%\RequirePackage{fancyvrb}  % pkg fancyvrb - fancy verbatim
+%\RequirePackage{fancyhdr}  % pkg fancyhdr - for headers and footers
+%\RequirePackage{url}
 
-%\usepackage{upgreek}    % upright greek fonts
-%\usepackage{mathrsfs}  % pkg jknappen (fonts rsfs and hoekwater [type 1])
+%\RequirePackage{upgreek}    % upright greek fonts
+%\RequirePackage{mathrsfs}  % pkg jknappen (fonts rsfs and hoekwater [type 1])
 %\let\MY@Rightarrow\Rightarrow
-%\usepackage{marvosym}  % for null symbol
+%\RequirePackage{marvosym}  % for null symbol
 %\let\Rightarrow\MY@Rightarrow
-%\usepackage[bbgreekl]{mathbbol}  % bbgreekl option for bb greek letters
-%\usepackage{bbding}              % for asterisk
+%\RequirePackage[bbgreekl]{mathbbol}  % bbgreekl option for bb greek letters
+%\RequirePackage{bbding}              % for asterisk
 
 %% Non-standard Packages
 
-\usepackage{mathpartir}  % inference rules
-%\usepackage{proof}     % inference rules
-%\usepackage{program}   % fancy program code layout
+\RequirePackage{mathpartir}  % inference rules
+%\RequirePackage{proof}     % inference rules
+%\RequirePackage{program}   % fancy program code layout
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Natbib
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \ifusenatbib
-  \usepackage[sort&compress]{natbib}
+  \RequirePackage[sort&compress]{natbib}
   %\bibpunct{[}{]}{;}{a}{}{,}      % author-year
   \bibpunct{[}{]}{,}{n}{}{,}   % numbered
   \ifusinglncs
@@ -366,7 +368,7 @@
 \ifusehyperref
   \ifgeneratingpdf
     % pdf output using pdflatex
-    \usepackage[pdftex,
+    \RequirePackage[pdftex,
                 %a4paper,
                 %letterpaper,
                 %backref,
@@ -386,7 +388,7 @@
   	     ]{hyperref}
   \else\ifgeneratinghtml
     % html output using tex4ht
-    \usepackage[tex4ht,
+    \RequirePackage[tex4ht,
                 colorlinks,
                 linkcolor=blue,
                 citecolor=blue,
@@ -809,9 +811,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\ifusehyperref
-%  \usepackage[thmmarks,amsmath,amsthm,hyperref]{ntheorem}
+%  \RequirePackage[thmmarks,amsmath,amsthm,hyperref]{ntheorem}
 %\else
-%  \usepackage[thmmarks,amsmath,amsthm]{ntheorem}
+%  \RequirePackage[thmmarks,amsmath,amsthm]{ntheorem}
 %\fi
 %\theoremseparator{.}
 %\renewtheoremstyle{plain}%
@@ -819,7 +821,7 @@
 %  {\item[\hskip\labelsep \theorem@headerfont ##1\ ##2\ {\normalfont(##3)}\theorem@separator]}
 
 \ifusetheoremenvs
-  \usepackage{amsthm}    % pkg amslatex
+  \RequirePackage{amsthm}    % pkg amslatex
 
   \theoremstyle{plain}
   \newtheorem{theorem}{Theorem}
@@ -960,7 +962,7 @@
 \newcommand{\fsZ}{\ensuremath{\mathscr{Z}}\xspace}
 
 % Math Blackboard
-%\usepackage[bbgreekl]{mathbbol}  % bbgreekl option for bb greek letters
+%\RequirePackage[bbgreekl]{mathbbol}  % bbgreekl option for bb greek letters
 \newcommand{\mathboldcommand}[1]{\mathbb{#1}}
 \newcommand{\bbA}{\mathboldcommand{A}}
 \newcommand{\bbB}{\mathboldcommand{B}}
@@ -1243,7 +1245,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \ifuseesvect
-  \usepackage[f]{esvect} % pkg esvect - different vector styles
+  \RequirePackage[f]{esvect} % pkg esvect - different vector styles
   \newcommand{\vect}[1]{\vv{#1}}
   \newcommand{\vectsub}[2]{\vv*{#1}{#2}}
 \else
