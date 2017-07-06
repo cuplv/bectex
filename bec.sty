@@ -208,6 +208,11 @@
   \newcommand{\hibox}[1]{%
     \fcolorbox{white}{black!20}{$#1$}%
   }
+  
+  % used by diff
+  \definecolor{lightredbg}{rgb}{1.0,0.93,0.93}
+  \definecolor{lightgreenbg}{rgb}{0.92,1.0,0.92}
+  \definecolor{lightyellowbg}{rgb}{1.0,1.0,0.88}
 \else
   \newcommand{\emcolor}{}
   \newcommand{\textemcolor}[1]{#1}
@@ -353,6 +358,27 @@
   \global\c@lstnumber\c@lstsubnum%.
   \gdef\thelstnumber{\arabic{lstnumber}}%
 }
+
+\newcommand{\lstcontn}{%
+  \lstnonum
+  \gdef\thelstnumber{$\cdot$}%
+}
+
+\lstnewenvironment{lstcont}[1][]
+ {\lstset{aboveskip=-\medskipamount,firstnumber=last,#1}}
+ {}
+\lstnewenvironment{lstinter}[1][]
+ {\lstset{aboveskip=-\medskipamount,firstnumber=last,#1}}
+ {}
+\lstnewenvironment{lstdiffplus}[1][]
+ {\lstset{aboveskip=-\medskipamount,firstnumber=last,backgroundcolor=\color{lightgreenbg},#1}}
+ {}
+\lstnewenvironment{lstdiffminus}[1][]
+ {\lstset{aboveskip=-\medskipamount,firstnumber=last,backgroundcolor=\color{lightredbg},#1}}
+ {}
+\lstnewenvironment{lstdiffassert}[1][]
+ {\lstset{aboveskip=-\medskipamount,firstnumber=last,backgroundcolor=\color{lightyellowbg},#1}}
+ {}
 
 \newcommand{\code}[2][\empty]{%
 \ifx#1\empty \ensuremath{\text{\lstinline~#2~}}%
