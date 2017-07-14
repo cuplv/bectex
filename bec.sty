@@ -230,24 +230,26 @@
 \RequirePackage{listings}
 
 \newcommand{\lstbasicstyle}{\ttfamily\fontseries{l}\selectfont}
+\newcommand{\lstkeywordstyle}{\relsize{-0.5}\fontseries{b}\selectfont}
+\newcommand{\lstcommentstyle}{\sl}
 \newcommand{\lstnumberstyle}{\scriptsize\em}
 
 \lstdefinestyle{default}{%
   backgroundcolor=\color{white},%
-  %basicstyle=\ttfamily,%
   basicstyle=\lstbasicstyle,%
-  commentstyle=\sl,%
-  %keywordstyle=\bf,%
-  keywordstyle=\footnotesize\fontseries{b}\selectfont,%
+  commentstyle=\lstcommentstyle,%
+  keywordstyle=\lstkeywordstyle,%
   columns=fullflexible,%
   keepspaces=true,%
   mathescape,%
   escapechar=\#%
 }
 \lstdefinestyle{color}{%
-  basicstyle=\ttfamily,%
-  commentstyle=\sl,%
-  keywordstyle=\color{dullteal},%
+  basicstyle=\lstbasicstyle,%
+  commentstyle=\lstcommentstyle,%
+  keywordstyle=\lstkeywordstyle\color{dullteal},%
+  keywordstyle=[2]\lstkeywordstyle\relsize{0.5}\color{dullmagenta},%
+  keywordstyle=[3]\lstkeywordstyle\relsize{0.5}\color{dullgreen},%
   identifierstyle=\color{dullblue},%
   columns=fullflexible,%
   keepspaces=true,%
@@ -255,10 +257,9 @@
   escapechar=\#%
 }
 \lstdefinestyle{grey}{%
-  basicstyle=\ttfamily\color{greyfifty},%
-  commentstyle=\ttfamily,%
-  keywordstyle=\ttfamily,%
-  identifierstyle=\ttfamily,%
+  basicstyle=\lstbasicstyle\color{greyfifty},%
+  commentstyle=\lstcommentstyle,%
+  keywordstyle=\lstkeywordstyle,%
   columns=fullflexible,%
   keepspaces=true,%
   mathescape,%
@@ -277,7 +278,7 @@
 }
 \lstdefinestyle{numbercaption}{%
   numbers=left,%
-  numberstyle=\scriptsize\em,%
+  numberstyle=\lstnumberstyle,%
   xleftmargin=2em,%
   frame=lines,%
   framerule=1pt,%
@@ -306,8 +307,9 @@
     new,null,object,override,package,%
     private,protected,requires,return,sealed,%
     super,this,throw,trait,true,try,%
-    type,val,var,while,with,yield},
-  otherkeywords={=>,<-,<\%,<:,>:,\#,@},
+    type,val,var,while,with,yield,%
+    assert},
+  otherkeywords={=,=>,<-,<\%,<:,>:,\#,@},
   %sensitive=true,
   morecomment=[l]{//},
   morecomment=[n]{/*}{*/},
