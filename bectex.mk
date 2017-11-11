@@ -7,16 +7,19 @@
 BIBS = $(wildcard *.orig.bib)
 SRCS = $(wildcard *.tex) $(wildcard *.sty) $(BIBS:%.orig.bib=%.short.bib)
 
-.PHONY: html pdf all cleandeps clean cleanall
+SHORT_BIBS = $(BIBS:%.orig.bib=%.short.bib)
+
+.PHONY: bib html pdf all cleandeps clean cleanall
 
 all: pdf
 pdf: ${PAPERS:%=%.pdf}
 html: ${PAPERS:%=%/index.html}
+bib: ${SHORT_BIBS}
 
 ${PAPERS:%=%.pdf}: ${SRCS}
 
 cleandeps:
-	rm -f $(BIBS:%.orig.bib=%.short.bib)
+	rm -f ${SHORT_BIBS}
 clean: cleandeps
 	latexmk -c
 cleanall: cleandeps
