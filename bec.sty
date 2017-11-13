@@ -101,10 +101,6 @@
 
 %% Common CTAN Contributed Packages
 
-\ifusesubfig
-  \RequirePackage[caption=false]{subfig}    % pkg subfig - subfigures
-\fi
-
 \RequirePackage{wrapfig}   % pkg wrapfig - wrap text around floats
 \setlength{\intextsep}{2pt}
 
@@ -223,6 +219,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage[normalem]{ulem}
 \useunder{\dashuline}{\dashul}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Subfig
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifusesubfig
+\RequirePackage[caption=false]{subfig}    % pkg subfig - subfigures
+
+\newcount\c@subsubfigure
+\newenvironment{subsubfigure}{%
+  \global\c@subsubfigure\c@subfigure%
+  \global\c@subfigure0%
+  \gdef\thesubfigure{\alph{subsubfigure}-\roman{subfigure}}%
+}{%
+  \global\c@subfigure\c@subsubfigure%
+  \gdef\thesubfigure{\alph{subsubfigure}}%
+}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Listings
