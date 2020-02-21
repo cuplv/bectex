@@ -1,9 +1,10 @@
 % Personal Macros - Bor-Yuh Evan Chang
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{bec}[2017/03/20 Bor-Yuh Evan Chang]
+\ProvidesPackage{bec}[2020/02/21 Bor-Yuh Evan Chang]
 
 % Options
+\newif\ifusingacmart\usingacmartfalse
 \newif\ifusinglncs\usinglncsfalse
 \newif\ifusinglipics\usinglipicsfalse
 \newif\ifusexcolor\usexcolortrue
@@ -13,7 +14,9 @@
 \newif\ifusegraphicx\usegraphicxtrue
 \newif\ifusesubfig\usesubfigtrue
 \newif\ifuseesvect\useesvectfalse
+\newif\ifuseamsmath\useamsmathtrue
 
+\DeclareOption{acmart}{\usingacmarttrue\usexcolorfalse\usenatbibfalse\usegraphicxfalse\usehyperreffalse\useamsmathfalse}
 \DeclareOption{lncs}{\usinglncstrue\usetheoremenvsfalse}
 \DeclareOption{lipics}{\usinglipicstrue\usegraphicxfalse\usesubfigfalse\usehyperreffalse\usetheoremenvsfalse}
 \DeclareOption{noxcolor}{\usexcolorfalse}
@@ -23,6 +26,7 @@
 \DeclareOption{nographicx}{\usegraphicxfalse}
 \DeclareOption{nosubfig}{\usesubfigfalse}
 \DeclareOption{esvect}{\useesvecttrue}
+\DeclareOption{noamsmath}{\useamsmathfalse}
 \ProcessOptions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -91,8 +95,10 @@
   \RequirePackage[dvips]{graphicx}   % pkg graphics
 \fi\fi
 
-\RequirePackage{amsmath}    % pkg amslatex
-\RequirePackage{amssymb}    % pkg amsfonts
+\ifuseamsmath
+  \RequirePackage{amsmath}    % pkg amslatex
+  \RequirePackage{amssymb}    % pkg amsfonts
+\fi
 %\RequirePackage{eucal}      % pkg amsfonts
 %\RequirePackage{eufrak}     % pkg amsfonts
 \RequirePackage{stmaryrd}   % pkg stmaryrd
