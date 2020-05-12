@@ -402,11 +402,11 @@
  {\lstset{aboveskip=-\medskipamount,firstnumber=last,backgroundcolor=\color{lightyellowbg},#1}}
  {}
 
-\newcommand{\code}[2][\empty]{%
+\newcommand{\lcode}[2][\empty]{%
 \ifx#1\empty \ensuremath{\text{\lstinline~#2~}}%
 \else \ensuremath{\text{\lstinline[language=#1]~#2~}}\fi}
-\newcommand{\codex}[2]{\ensuremath{\text{\lstinline[#1]~#2~}}}
-\newcommand{\pcode}[1]{\ensuremath{\text{\texttt{#1}}}}
+\newcommand{\lcodex}[2]{\ensuremath{\text{\lstinline[#1]~#2~}}}
+\newcommand{\tcode}[1]{\ensuremath{\text{\texttt{#1}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Hyperref
