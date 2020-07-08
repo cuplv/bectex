@@ -1,7 +1,7 @@
 % Personal Macros - Bor-Yuh Evan Chang
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{bec}[2020/02/21 Bor-Yuh Evan Chang]
+\ProvidesPackage{bec}[2020/07/08 Bor-Yuh Evan Chang]
 
 % Options
 \newif\ifusingacmart\usingacmartfalse
@@ -15,8 +15,9 @@
 \newif\ifusesubfig\usesubfigtrue
 \newif\ifuseesvect\useesvectfalse
 \newif\ifuseamsmath\useamsmathtrue
+\newif\ifuseparalist\useparalisttrue
 
-\DeclareOption{acmart}{\usingacmarttrue\usexcolorfalse\usenatbibfalse\usegraphicxfalse\usehyperreffalse\useamsmathfalse}
+\DeclareOption{acmart}{\usingacmarttrue\usexcolorfalse\usenatbibfalse\usegraphicxfalse\usehyperreffalse\useamsmathfalse\usetheoremenvsfalse}
 \DeclareOption{lncs}{\usinglncstrue\usetheoremenvsfalse}
 \DeclareOption{lipics}{\usinglipicstrue\usegraphicxfalse\usesubfigfalse\usehyperreffalse\usetheoremenvsfalse}
 \DeclareOption{noxcolor}{\usexcolorfalse}
@@ -27,6 +28,7 @@
 \DeclareOption{nosubfig}{\usesubfigfalse}
 \DeclareOption{esvect}{\useesvecttrue}
 \DeclareOption{noamsmath}{\useamsmathfalse}
+\DeclareOption{noparalist}{\useparalistfalse}
 \ProcessOptions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -88,12 +90,7 @@
 
 \RequirePackage{xspace}     % pkg tools
 \RequirePackage{tabularx}   % pkg tools - equal width columns
-
-\ifusegraphicx\ifgeneratingpdf
-  \RequirePackage[pdftex]{graphicx}   % pkg graphics
-\else
-  \RequirePackage[dvips]{graphicx}   % pkg graphics
-\fi\fi
+\RequirePackage{graphicx}   % pkg graphics
 
 \ifuseamsmath
   \RequirePackage{amsmath}    % pkg amslatex
@@ -110,8 +107,11 @@
 \RequirePackage{wrapfig}   % pkg wrapfig - wrap text around floats
 \setlength{\intextsep}{2pt}
 
+\ifuseparalist
+  \RequirePackage{paralist}
+\fi
+
 \RequirePackage{booktabs}  % pkg booktabs - nicer table layout
-\RequirePackage{paralist}
 \RequirePackage{relsize}    % relative font size
 
 %\RequirePackage{cancel}    % math strikethrough
@@ -1188,7 +1188,7 @@
 \newcommand{\abs}[1]{\mathopen| #1 \mathclose|}    % use instead of $|x|$
 \newcommand{\norm}[1]{\mathopen\| #1 \mathclose\|} % use instead of $\|x\|$
 \newcommand{\card}[1]{\abs{#1}}
-\newcommand{\denote}[1]{\llbracket #1 \rrbracket}
+%\newcommand{\denote}[1]{\llbracket #1 \rrbracket}
 \newcommand{\ucorners}[1]{\ulcorner #1 \urcorner}
 \newcommand{\lcorners}[1]{\llcorner #1 \lrcorner}
 
